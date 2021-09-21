@@ -6,4 +6,7 @@ node{
             sh "chmod 777 -R ./ventoux/mvnw"
             sh "cd ventoux && ./mvnw clean install -DskipTests"
         }
+     stage("build front end"){
+            sh "cd front && npm install && ng build --prod"
+     }
 }

@@ -7,6 +7,19 @@ node{
             sh "cd ventoux && ./mvnw clean install -DskipTests"
         }
      stage("build front end"){
-            sh "cd front && npm install && ng build --prod"
+            agent {
+                            docker {
+                                image 'yolch/ng-test-build:latest'
+                                reuseNode true
+                            }
+                        }
+            steps {
+                            sh '''
+                            cd front
+                            npm install
+                            ng test --browsers ChromeHeadlessCustom --watch false
+                            ng build --prod
+                            '''
+                        }
      }
 }

@@ -1,4 +1,7 @@
 node{
+    agent {
+        docker { image 'node:latest' }
+      }
     stage("checkout"){
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'githubVentoux', url: 'https://github.com/Gayaferhat/Tourmalet.git']]])
     }
@@ -7,12 +10,6 @@ node{
             sh "cd ventoux && ./mvnw clean install -DskipTests"
         }
      stage("build front end"){
-            agent {
-                            docker {
-                                image 'yolch/ng-test-build:latest'
-                                reuseNode true
-                            }
-                        }
             steps {
                             sh '''
                             cd front

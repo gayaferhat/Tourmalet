@@ -1,0 +1,30 @@
+version: '2'
+services:
+  ventoux:
+    build:
+      context: ventoux
+      dockerfile: Dockerfile
+    image: ventoux
+    container_name: ventoux
+    ports:
+      - "8078:8080"
+  front:
+    build:
+      context: front
+      dockerfile: Dockerfile
+    image: front
+    container_name: front
+    ports:
+      - "8072:4200"
+    volumes:
+      - ./front/conf:/etc/nginx/conf.d/
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins
+    user: root
+    ports:
+      - "9010:8080"
+    volumes:
+      - jenkins_data/:/var/jenkins_home
+volumes:
+  jenkins_data:

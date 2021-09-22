@@ -7,7 +7,7 @@ services:
     image: ventoux
     container_name: ventoux
     ports:
-      - "8078:8080"
+      - "8080:8080"
   front:
     build:
       context: front

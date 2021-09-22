@@ -11,7 +11,7 @@ node('amzon') {
         }
 
      try{
-           sh "docker-compose down"
+           sh "sudo docker-compose down"
         }catch(Exception e){
             println "aucun conteneur n'est lancé"
      }

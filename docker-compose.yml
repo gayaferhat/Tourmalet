@@ -15,7 +15,7 @@ services:
     image: front
     container_name: front
     ports:
-      - "8072:80"
+      - "8072:4200"
     volumes:
       - ./front/conf:/etc/nginx/conf.d/
   jenkins:

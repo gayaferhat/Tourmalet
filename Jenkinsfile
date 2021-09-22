@@ -6,7 +6,17 @@ node('amzon') {
             sh "chmod 777 -R ./ventoux/mvnw"
             sh "cd ventoux && ./mvnw clean install -DskipTests"
         }
-      stage ("build front end") {
-             sh "cd front && npm install && ng build --prod"
-         }
+     stage ("build front end") {
+            sh "cd front && npm install && ng build --prod"
+        }
+
+     try{
+           sh "docker-compose down"
+        }catch(Exception e){
+            println "aucun conteneur n'est lancé"
+     }
+
+     stage ("deploy app"){
+        sh "sudo docker-compose up --build -d"
+     }
 }
